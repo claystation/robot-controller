@@ -44,10 +44,10 @@ public class Main {
     }
 
     private static Robot createRobot(final Room room) throws ParseException {
-        System.out.println("Please define the position and facing direction of the robot separated by spaces: \"x y n\"");
+        System.out.println("Please define the position and facing direction of the robot separated by spaces: \"X Y D\"");
         final Position position = new PositionParser().parse(reader.read());
         if (!room.validPosition(position)) {
-            throw new ParseException("Given position is not valid in the room.");
+            throw new ParseException("Given position is not valid in the room");
         }
 
         return new Robot(position, room);
