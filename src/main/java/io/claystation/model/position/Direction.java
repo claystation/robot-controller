@@ -20,7 +20,10 @@ public enum Direction {
     }
 
     public static Direction parseFromString(final String direction) {
-        return Arrays.stream(values()).filter(v -> v.direction.equals(direction)).findFirst().orElseThrow(() -> new IllegalArgumentException("Invalid character given as direction"));
+        return Arrays.stream(values())
+                .filter(v -> v.direction.equals(direction))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid character given as direction"));
     }
 
     public String getDirection() {

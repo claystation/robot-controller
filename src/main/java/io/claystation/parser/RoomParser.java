@@ -1,17 +1,19 @@
-package io.claystation.validation;
+package io.claystation.parser;
 
 import io.claystation.exception.ParseException;
 import io.claystation.model.Room;
 
 import java.util.regex.Pattern;
 
-public class RoomParser implements Parser {
+public class RoomParser {
 
-    private final Pattern format = Pattern.compile("\\d+\\s\\d+");
+    private static final Pattern FORMAT = Pattern.compile("\\d+\\s\\d+");
 
-    @Override
-    public Room parse(final String input) throws ParseException {
-        if (!format.matcher(input).matches()) {
+    private RoomParser() {
+    }
+
+    public static Room parse(final String input) throws ParseException {
+        if (!FORMAT.matcher(input).matches()) {
             throw new ParseException("Room dimension does not have a valid format, 2 positive numbers separated with a space: \"10 10\"");
         }
 

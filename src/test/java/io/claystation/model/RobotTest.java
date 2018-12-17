@@ -1,5 +1,6 @@
 package io.claystation.model;
 
+import io.claystation.model.command.Command;
 import io.claystation.model.position.Direction;
 import io.claystation.model.position.Position;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,55 +22,55 @@ class RobotTest {
 
     @Test
     void turnLeftTest() {
-        robot.turnLeft();
+        robot.execute(Command.LEFT);
         assertEquals(Direction.WEST, robot.getCurrentPosition().getDirection());
-        robot.turnLeft();
+        robot.execute(Command.LEFT);
         assertEquals(Direction.SOUTH, robot.getCurrentPosition().getDirection());
-        robot.turnLeft();
+        robot.execute(Command.LEFT);
         assertEquals(Direction.EAST, robot.getCurrentPosition().getDirection());
-        robot.turnLeft();
+        robot.execute(Command.LEFT);
         assertEquals(Direction.NORTH, robot.getCurrentPosition().getDirection());
     }
 
     @Test
     void turnRightTest() {
-        robot.turnRight();
+        robot.execute(Command.RIGHT);
         assertEquals(Direction.EAST, robot.getCurrentPosition().getDirection());
-        robot.turnRight();
+        robot.execute(Command.RIGHT);
         assertEquals(Direction.SOUTH, robot.getCurrentPosition().getDirection());
-        robot.turnRight();
+        robot.execute(Command.RIGHT);
         assertEquals(Direction.WEST, robot.getCurrentPosition().getDirection());
-        robot.turnRight();
+        robot.execute(Command.RIGHT);
         assertEquals(Direction.NORTH, robot.getCurrentPosition().getDirection());
     }
 
     @Test
     void moveForwardTurningRightTest() {
-        robot.moveForward();
+        robot.execute(Command.FORWARD);
         assertEquals(4, robot.getCurrentPosition().getY());
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
         assertEquals(6, robot.getCurrentPosition().getX());
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
         assertEquals(5, robot.getCurrentPosition().getY());
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
         assertEquals(5, robot.getCurrentPosition().getX());
     }
 
     @Test
     void moveForwardTurningLeftTest() {
-        robot.moveForward();
+        robot.execute(Command.FORWARD);
         assertEquals(4, robot.getCurrentPosition().getY());
-        robot.turnLeft();
-        robot.moveForward();
+        robot.execute(Command.LEFT);
+        robot.execute(Command.FORWARD);
         assertEquals(4, robot.getCurrentPosition().getX());
-        robot.turnLeft();
-        robot.moveForward();
+        robot.execute(Command.LEFT);
+        robot.execute(Command.FORWARD);
         assertEquals(5, robot.getCurrentPosition().getY());
-        robot.turnLeft();
-        robot.moveForward();
+        robot.execute(Command.LEFT);
+        robot.execute(Command.FORWARD);
         assertEquals(5, robot.getCurrentPosition().getX());
     }
 
@@ -78,18 +79,18 @@ class RobotTest {
         final Robot robot = new Robot(new Position(1, 2, Direction.NORTH), room);
 
         //RFRFFRFRF
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
 
-        robot.turnRight();
-        robot.moveForward();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
+        robot.execute(Command.FORWARD);
 
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
 
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
 
         assertEquals(1, robot.getCurrentPosition().getX());
         assertEquals(3, robot.getCurrentPosition().getY());
@@ -101,16 +102,16 @@ class RobotTest {
         final Robot robot = new Robot(new Position(0, 0, Direction.EAST), room);
 
         //RFLFFLRF
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
 
-        robot.turnLeft();
-        robot.moveForward();
-        robot.moveForward();
+        robot.execute(Command.LEFT);
+        robot.execute(Command.FORWARD);
+        robot.execute(Command.FORWARD);
 
-        robot.turnLeft();
-        robot.turnRight();
-        robot.moveForward();
+        robot.execute(Command.LEFT);
+        robot.execute(Command.RIGHT);
+        robot.execute(Command.FORWARD);
 
         assertEquals(3, robot.getCurrentPosition().getX());
         assertEquals(1, robot.getCurrentPosition().getY());

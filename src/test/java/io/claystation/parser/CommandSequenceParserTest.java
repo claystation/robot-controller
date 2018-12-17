@@ -1,24 +1,17 @@
-package io.claystation.validation;
+package io.claystation.parser;
 
 import io.claystation.exception.ParseException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommandSequenceParserTest {
 
-    private CommandSequenceParser commandSequenceParser;
-
-    @BeforeEach
-    void setUp() {
-        commandSequenceParser = new CommandSequenceParser();
-    }
-
     @Test
     void validSequenceTest() {
-        assertDoesNotThrow(() -> commandSequenceParser.parse("LFFRFFLRFLFRF"));
-        assertDoesNotThrow(() -> commandSequenceParser.parse("FFRFLFFRRFFLF"));
+        // TODO: Assert outcome
+        assertDoesNotThrow(() -> CommandSequenceParser.parse("LFFRFFLRFLFRF"));
+        assertDoesNotThrow(() -> CommandSequenceParser.parse("FFRFLFFRRFFLF"));
     }
 
     @Test
@@ -32,7 +25,7 @@ class CommandSequenceParserTest {
     }
 
     private void assertThrowsAndVerifyErrorMessage(final String input) {
-        final Throwable exception = assertThrows(ParseException.class, () -> commandSequenceParser.parse(input));
+        final Throwable exception = assertThrows(ParseException.class, () -> CommandSequenceParser.parse(input));
         assertEquals("Command sequence is not in a valid format, one or more of the following 3 characters \"L F R\" without spaces: \"LFRFLFRLFFR\"", exception.getMessage());
     }
 

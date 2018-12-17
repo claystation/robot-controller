@@ -1,21 +1,20 @@
-package io.claystation.validation;
+package io.claystation.parser;
 
 import io.claystation.exception.ParseException;
-import io.claystation.model.Robot;
 import io.claystation.model.command.Command;
 import io.claystation.model.command.CommandSequence;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
-public class CommandSequenceParser implements Parser {
+public class CommandSequenceParser {
 
-    private final Pattern format = Pattern.compile("^[LFR]+$");
+    private static final Pattern FORMAT = Pattern.compile("^[LFR]+$");
 
-    @Override
-    public CommandSequence parse(final String input) throws ParseException {
-        if (!format.matcher(input).matches()) {
+    private CommandSequenceParser() {}
+
+    public static CommandSequence parse(final String input) throws ParseException {
+        if (!FORMAT.matcher(input).matches()) {
             throw new ParseException("Command sequence is not in a valid format, one or more of the following 3 characters \"L F R\" without spaces: \"LFRFLFRLFFR\"");
         }
 

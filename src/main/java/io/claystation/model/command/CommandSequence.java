@@ -1,12 +1,13 @@
 package io.claystation.model.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommandSequence {
 
-    private final ArrayList<Command> commands = new ArrayList<>();
+    private final List<Command> commands = new ArrayList<>();
 
-    public ArrayList<Command> getCommands() {
+    public List<Command> getCommands() {
         return commands;
     }
 
