@@ -8,16 +8,12 @@ public class Room {
     private final int height;
 
     public Room(final int width, final int height) {
+        if (width < 1 || height < 1) {
+            throw new IllegalArgumentException("Room dimensions must be greater than 0");
+        }
+
         this.width = width;
         this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public boolean validPosition(final Position position) {

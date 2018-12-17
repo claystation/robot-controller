@@ -7,12 +7,10 @@ import io.claystation.model.command.CommandSequence;
 
 class Controller {
 
-    private final Room room;
     private final Robot robot;
     private final CommandSequence commandSequence;
 
-    Controller(final Room room, final Robot robot, final CommandSequence commandSequence) {
-        this.room = room;
+    Controller(final Robot robot, final CommandSequence commandSequence) {
         this.robot = robot;
         this.commandSequence = commandSequence;
     }
@@ -25,14 +23,8 @@ class Controller {
                     } else if (Command.RIGHT.equals(command)) {
                         robot.turnRight();
                     } else {
-                        if (room.validPosition(robot.getForwardPosition())) {
-                            robot.moveForward();
-                        }
+                        robot.moveForward();
                     }
                 });
-    }
-
-    String report() {
-        return "Report: " + robot.reportPosition();
     }
 }

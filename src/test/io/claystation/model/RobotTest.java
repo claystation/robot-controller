@@ -2,7 +2,6 @@ package io.claystation.model;
 
 import io.claystation.model.position.Direction;
 import io.claystation.model.position.Position;
-import io.claystation.model.Robot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,22 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class RobotTest {
 
     private Robot robot;
+    private Room room;
 
     @BeforeEach
     void setUp() {
         final Position initialPosition = new Position(5, 5, Direction.NORTH);
-        robot = new Robot(initialPosition);
-    }
-
-    @Test
-    void getNextPositionTest() {
-        final Position possibleNewPosition = robot.getForwardPosition();
-        assertEquals(5, possibleNewPosition.getX());
-        assertEquals(4, possibleNewPosition.getY());
-
-        assertEquals(possibleNewPosition.getX(), robot.getForwardPosition().getX());
-        assertEquals(possibleNewPosition.getY(), robot.getForwardPosition().getY());
-        assertEquals(possibleNewPosition.getDirection(), robot.getForwardPosition().getDirection());
+        room = new Room(10, 10);
+        robot = new Robot(initialPosition, room);
     }
 
     @Test
@@ -85,7 +75,7 @@ class RobotTest {
 
     @Test
     void randomSequenceTest() {
-        final Robot robot = new Robot(new Position(1, 2, Direction.NORTH));
+        final Robot robot = new Robot(new Position(1, 2, Direction.NORTH), room);
 
         //RFRFFRFRF
         robot.turnRight();
@@ -108,7 +98,7 @@ class RobotTest {
 
     @Test
     void anotherRandomSequenceTest() {
-        final Robot robot = new Robot(new Position(0, 0, Direction.EAST));
+        final Robot robot = new Robot(new Position(0, 0, Direction.EAST), room);
 
         //RFLFFLRF
         robot.turnRight();
@@ -126,15 +116,4 @@ class RobotTest {
         assertEquals(1, robot.getCurrentPosition().getY());
         assertEquals(Direction.EAST, robot.getCurrentPosition().getDirection());
     }
-
-    @Test
-    void reportPositionTest() {
-        assertEquals("5 5 N", robot.reportPosition());
-        robot.moveForward();
-        robot.moveForward();
-        robot.turnLeft();
-        robot.moveForward();
-        assertEquals("4 3 W", robot.reportPosition());
-    }
-
 }

@@ -21,32 +21,32 @@ class ControllerTest {
     @BeforeEach
     void setUp() {
         room = new Room(5, 5);
-        robot = new Robot(new Position(1, 2, Direction.NORTH));
+        robot = new Robot(new Position(1, 2, Direction.NORTH), room);
     }
 
     @Test
     void executeSequenceTest() {
-        final Controller controller = new Controller(room, robot, createSequence("RFRFFRFRF"));
+        final Controller controller = new Controller(robot, createSequence("RFRFFRFRF"));
 
         controller.execute();
-        assertEquals("Report: 1 3 N", controller.report());
+        assertEquals("1 3 N", robot.getCurrentPosition().toString());
     }
 
     @Test
     void executeAnotherSequenceTest() {
-        final Robot robot = new Robot(new Position(0, 0, Direction.EAST));
-        final Controller controller = new Controller(room, robot, createSequence("RFLFFLRF"));
+        final Robot robot = new Robot(new Position(0, 0, Direction.EAST), room);
+        final Controller controller = new Controller(robot, createSequence("RFLFFLRF"));
 
         controller.execute();
-        assertEquals("Report: 3 1 E", controller.report());
+        assertEquals("3 1 E", robot.getCurrentPosition().toString());
     }
 
     @Test
     void executeImpossibleSequenceTest() {
-        final Controller controller = new Controller(room, robot, createSequence("FFFFFFFFFFFF"));
+        final Controller controller = new Controller(robot, createSequence("FFFFFFFFFFFF"));
 
         controller.execute();
-        assertEquals("Report: 1 0 N", controller.report());
+        assertEquals("1 0 N", robot.getCurrentPosition().toString());
     }
 
     private CommandSequence createSequence(final String sequence) {

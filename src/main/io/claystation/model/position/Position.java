@@ -27,16 +27,16 @@ public class Position {
     public Position getForward() {
         int newX = x;
         int newY = y;
-        if (Direction.NORTH.equals(this.direction)) {
+        if (Direction.NORTH.equals(direction)) {
             newY--;
-        } else if (Direction.EAST.equals(this.direction)) {
+        } else if (Direction.EAST.equals(direction)) {
             newX++;
-        } else if (Direction.SOUTH.equals(this.direction)) {
+        } else if (Direction.SOUTH.equals(direction)) {
             newY++;
         } else {
             newX--;
         }
-        return new Position(newX, newY, this.direction);
+        return new Position(newX, newY, direction);
     }
 
     public Position getLeft() {

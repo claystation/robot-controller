@@ -1,24 +1,24 @@
 package io.claystation.validation;
 
-import io.claystation.exception.ValidationException;
+import io.claystation.exception.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PositionValidationRuleTest {
+class PositionParserTest {
 
-    private PositionValidationRule positionValidationRule;
+    private PositionParser positionParser;
 
     @BeforeEach
     void setUp() {
-        positionValidationRule = new PositionValidationRule();
+        positionParser = new PositionParser();
     }
 
     @Test
     void validInputTest() {
-        assertDoesNotThrow(() -> positionValidationRule.validate("1 2 N"));
-        assertDoesNotThrow(() -> positionValidationRule.validate("0 0 E"));
+        assertDoesNotThrow(() -> positionParser.parse("1 2 N"));
+        assertDoesNotThrow(() -> positionParser.parse("0 0 E"));
     }
 
     @Test
@@ -50,14 +50,14 @@ class PositionValidationRuleTest {
 
     @Test
     void invalidIntegerTest() {
-        final Throwable exceptionX = assertThrows(ValidationException.class, () -> positionValidationRule.validate("2147483648 5 N"));
+        final Throwable exceptionX = assertThrows(ParseException.class, () -> positionParser.parse("2147483648 5 N"));
         assertEquals("Position X is not a valid number", exceptionX.getMessage());
-        final Throwable exceptionY = assertThrows(ValidationException.class, () -> positionValidationRule.validate("5 2147483648 N"));
+        final Throwable exceptionY = assertThrows(ParseException.class, () -> positionParser.parse("5 2147483648 N"));
         assertEquals("Position Y is not a valid number", exceptionY.getMessage());
     }
 
     private void assertThrowsAndVerifyErrorMessage(final String input) {
-        final Throwable exception = assertThrows(ValidationException.class, () -> positionValidationRule.validate(input));
+        final Throwable exception = assertThrows(ParseException.class, () -> positionParser.parse(input));
         assertEquals("Position does not have a valid format, 2 positive numbers and one of the following characters \"N E S W\" separated with a space: \"5 5 N\"", exception.getMessage());
     }
 
