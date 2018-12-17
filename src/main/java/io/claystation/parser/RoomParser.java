@@ -13,6 +13,8 @@ public class RoomParser {
     }
 
     public static Room parse(final String input) throws ParseException {
+        System.out.println(input);
+
         if (!FORMAT.matcher(input).matches()) {
             throw new ParseException("Room dimension does not have a valid format, 2 positive numbers separated with a space: \"10 10\"");
         }
