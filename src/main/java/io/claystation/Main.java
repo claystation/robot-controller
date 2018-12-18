@@ -22,10 +22,11 @@ public class Main {
             final Room room = createRoom();
             final Robot robot = createRobot(room);
             final CommandSequence commandSequence = createCommandSequence();
+            final Controller controller = new Controller(robot);
 
             commandSequence
                     .getCommands()
-                    .forEach(robot::execute);
+                    .forEach(controller::execute);
 
             System.out.println("Report: " + robot.getCurrentPosition());
         } catch (final ParseException e) {
