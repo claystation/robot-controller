@@ -11,7 +11,8 @@ public class CommandSequenceParser {
 
     private static final Pattern FORMAT = Pattern.compile("^[LFR]+$");
 
-    private CommandSequenceParser() {}
+    private CommandSequenceParser() {
+    }
 
     public static CommandSequence parse(final String input) throws ParseException {
         if (!FORMAT.matcher(input).matches()) {

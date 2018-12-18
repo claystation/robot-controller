@@ -10,7 +10,8 @@ public class PositionParser {
 
     private static final Pattern FORMAT = Pattern.compile("\\d+\\s\\d+\\s[NESW]");
 
-    private PositionParser() {}
+    private PositionParser() {
+    }
 
     public static Position parse(final String input) throws ParseException {
         if (!FORMAT.matcher(input).matches()) {
