@@ -1,6 +1,8 @@
 package io.claystation.parser;
 
 import io.claystation.exception.ParseException;
+import io.claystation.model.command.Command;
+import io.claystation.model.command.CommandSequence;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,9 +11,15 @@ class CommandSequenceParserTest {
 
     @Test
     void validSequenceTest() {
-        // TODO: Assert outcome
-        assertDoesNotThrow(() -> CommandSequenceParser.parse("LFFRFFLRFLFRF"));
-        assertDoesNotThrow(() -> CommandSequenceParser.parse("FFRFLFFRRFFLF"));
+        CommandSequence sequence = assertDoesNotThrow(() -> CommandSequenceParser.parse("LFFRFFLRFLFRF"));
+        assertEquals(13, sequence.getCommands().size());
+        assertEquals(Command.LEFT, sequence.getCommands().get(0));
+        assertEquals(Command.FORWARD, sequence.getCommands().get(sequence.getCommands().size() - 1));
+
+        CommandSequence anotherSequence = assertDoesNotThrow(() -> CommandSequenceParser.parse("FFRFLFFRRFFR"));
+        assertEquals(12, anotherSequence.getCommands().size());
+        assertEquals(Command.FORWARD, anotherSequence.getCommands().get(0));
+        assertEquals(Command.RIGHT, anotherSequence.getCommands().get(anotherSequence.getCommands().size() - 1));
     }
 
     @Test
